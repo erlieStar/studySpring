@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.makenv.mapper.SpittleMapper">
+    
+    <resultMap id="spittleMap" type="spittle">
+        <id property="id" column="id"/>
+        <result property="message" column="message"/>
+        <result property="time" column="created_at"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+    </resultMap>
+
+    <select id="selectSpittles" resultMap="spittleMap">
+        select * from spittle
+    </select>
+
+    <select id="selectOne" parameterType="int" resultMap="spittleMap">
+        select * from spittle where id = #{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="trackCounter" class="com.makenv.part4.TrackCounter"/>
+    <bean id="cd" class="com.makenv.part4.BlankDisc">
+        <property name="title" value="title"/>
+        <property name="artist" value="artist"/>
+        <property name="tracks">
+            <list>
+                <value>A</value>
+                <value>B</value>
+                <value>C</value>
+            </list>
+        </property>
+    </bean>
+    <aop:config>
+        <aop:aspect ref="trackCounter">
+            <aop:pointcut id="trackPlayed" expression="execution( * com.makenv.part4.CompactDisc.playTrack(int)) and args(trackNumber)"/>
+            <aop:before method="countTrack" pointcut-ref="trackPlayed"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

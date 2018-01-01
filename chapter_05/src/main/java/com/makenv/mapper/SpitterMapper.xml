@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.makenv.mapper.SpitterMapper">
+    
+    <resultMap id="spitterMap" type="spitter">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+        <result property="email" column="email"/>
+    </resultMap>
+
+    <insert id="insertSpitter" parameterType="spitter">
+        insert into spitter (username, password, first_name, last_name, email) values (#{username}, #{password}, #{firstName}, #{lastName}, #{email})
+    </insert>
+
+    <select id="selectByUsername" resultMap="spitterMap">
+        select * from spitter where username = #{username} limit 1
+    </select>
+
+</mapper>
